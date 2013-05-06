@@ -1,0 +1,60 @@
+.erlang-type-prefix ""
+.protobuf-package "com.generated.chat"
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chat:
+
+.record [
+    .name message
+    .field [ .name to .type recipient .required ]
+    .field [ .name from .type string .required ]
+    .field [ .name body .type string .required ]
+]
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Requests:
+
+.variant [
+    .name recipient
+    .option [ .name user .type string ]
+    .option [ .name group .type string ]
+]
+
+.record [
+    .name say
+    .field [ .name to .type recipient .required ]
+    .field [ .name body .type string .required ]
+]
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Interface definition:
+
+.record [
+    .name user-left-group
+    .field [ .name userid .type string .required ]
+    .field [ .name groupid .type string .required ]
+]
+
+.record [
+    .name user-joined-group
+    .field [ .name userid .type string .required ]
+    .field [ .name groupid .type string .required ]
+]
+
+.variant [
+    .name event
+    .option [ .type message ]
+    .option [ .type user-left-group ]
+    .option [ .type user-joined-group ]
+]
+
+.variant [
+    .name client2chat
+    .option [ .type say ]
+    .option [ .name join-group .type string ]
+    .option [ .name leave-group .type string ]
+]
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
